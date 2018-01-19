@@ -1,0 +1,54 @@
+<script>
+  let getRandomInt = (max) => Math.floor(Math.random() * Math.floor(max))
+
+  let computerPlay = () => ['Rock', 'Paper', 'Scissors'][getRandomInt(3)]
+
+  let playRound = (playerSelection, computerSelection) => {
+    let pS = playerSelection.toLowerCase()
+    let cS = computerSelection.toLowerCase()
+
+    if(pS === cS) {
+      return 0
+    } else if((pS === 'rock' && cS === 'scissors' ) ||
+              (pS === 'scissors' && cS === 'paper' ) || 
+              (pS === 'paper' && cS === 'rock' )) {
+      return 1
+    } else {
+      return -1
+    }
+  };
+
+  let game = () => {
+    for(let i = 0; i < numberGames; i++) {
+      let pS = prompt('Please choose between those three, Rock, Paper, or Scissors!')
+      let cS = computerPlay()
+      let result = playRound(pS, cS)
+
+      pS = pS.charAt(0).toUpperCase() + pS.substr(1)
+
+      if (result === 1) {
+        console.log("You win, " + pS + " beats " + cS)
+        playerScore++
+      } else if (result === -1) {
+        console.log("You lose, " + cS + " beats " + pS)
+        computerScore++ 
+      } else {
+        console.log("It's a tie!")
+      }
+    }
+
+    if(playerScore > computerScore) {
+      console.log("You win with score of " + playerScore + " to " + computerScore)
+    } else if(playerScore === computerScore) {
+      console.log("You tied with score of " + playerScore + " to " + computerScore)
+    } else {
+      console.log("You lose with score of " + playerScore + " to " + computerScore)
+    }
+  };
+
+  const numberGames = 5
+  let playerScore = 0,
+      computerScore = 0
+
+  game()
+</script>
